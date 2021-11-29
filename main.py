@@ -31,15 +31,19 @@ class DrawerList(ThemableBehavior, MDList):
         instance_item.text_color = self.theme_cls.primary_color
 
 
-class TestNavigationDrawer(MDApp):
+class MortgageCalc(MDApp):
+    title = "Mortgage Calculator"
+    by_who = "Me"
+
     def build(self):
         return Builder.load_file('MortgageCalculator.kv')
+
 
     def on_start(self):
         icons_item = {
             "folder": "My files",
             "account-multiple": "Shared with me",
-            "star": "Starred",
+            "chat-outline": "Chat",
             "history": "Recent",
             "checkbox-marked": "Shared with me",
             "upload": "Upload",
@@ -54,4 +58,20 @@ class TestNavigationDrawer(MDApp):
         for icon_name, name_tab in icons_item.items():
             self.root.ids.tabs.add_widget(Tab (text = f"[ref={name_tab}][font={fonts[-1]['fn_regular']}]{md_icons[icon_name]}[/font][/ref]  {name_tab}"))
 
-TestNavigationDrawer().run()
+
+    def on_tab_switch(self, instance_tabs, instance_tab, instance_tab_label, tab_text):
+        '''Called when switching tabs.
+
+        :type instance_tabs: <kivymd.uix.tab.MDTabs object>;
+        :param instance_tab: <__main__.Tab object>;
+        :param instance_tab_label: <kivymd.uix.tab.MDTabsLabel object>;
+        :param tab_text: text or name icon of tab;
+        '''
+        print(f"Tab_clickes " + tab_text)
+
+    def on_star_click(self):
+        print ("Star clicked")
+        pass
+
+
+MortgageCalc().run()

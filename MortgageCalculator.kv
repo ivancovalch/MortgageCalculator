@@ -27,12 +27,12 @@
             source: "data/logo/kivy-icon-256.png"
 
     MDLabel:
-        text: "KivyMD library"
+        text: app.title
         font_style: "Button"
         adaptive_height: True
 
     MDLabel:
-        text: "kivydevelopment@gmail.com"
+        text: app.by_who
         font_style: "Caption"
         adaptive_height: True
 
@@ -47,12 +47,21 @@ MDScreen:
                 MDBoxLayout:
                     orientation: 'vertical'
                     MDToolbar:
-                        title: "Navigation Drawer"
+                        title: app.title
                         elevation: 10
+                        background_color: 0.1, 0.1, 0.5, 1
                         left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                        right_action_items: [['star-outline', lambda x: app.on_star_click()]]
 
                     MDTabs:
                         id: tabs
+                        on_tab_switch: app.on_tab_switch(*args)
+                        height: "48dp"
+                        tab_indicator_anim: False
+                        background_color: 0.3, 0.3, 0.3, 1
+
+                    Widget:
+
 
 
         MDNavigationDrawer:
