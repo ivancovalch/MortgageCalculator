@@ -1,9 +1,16 @@
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ListProperty
 from kivymd.app import MDApp
+from kivymd.font_definitions import fonts
 from kivymd.theming import ThemableBehavior
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.list import OneLineIconListItem, MDList
+from kivymd.uix.tab import MDTabsBase
+from kivymd.uix.floatlayout import FloatLayout
+from kivymd.icon_definitions import md_icons\
+
+class Tab(FloatLayout, MDTabsBase):
+    pass # '''Class implementing content for a tab.'''
 
 class ContentNavigationDrawer(MDBoxLayout):
     pass
@@ -23,6 +30,7 @@ class DrawerList(ThemableBehavior, MDList):
                 break
         instance_item.text_color = self.theme_cls.primary_color
 
+
 class TestNavigationDrawer(MDApp):
     def build(self):
         return Builder.load_file('MortgageCalculator.kv')
@@ -41,5 +49,9 @@ class TestNavigationDrawer(MDApp):
                 ItemDrawer(icon=icon_name, text=icons_item[icon_name])
             )
 
+        #for name_tab in list(md_icons.keys())[15:30]:
+            #self.root.ids.tabs.add_widget(Tab(icon=name_tab, title=name_tab))
+        for icon_name, name_tab in icons_item.items():
+            self.root.ids.tabs.add_widget(Tab (text = f"[ref={name_tab}][font={fonts[-1]['fn_regular']}]{md_icons[icon_name]}[/font][/ref]  {name_tab}"))
 
 TestNavigationDrawer().run()
